@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Clone') {
+            steps {
+                echo "Cloning Repository"
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building HTML project"
+                bat 'dir'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Checking HTML file"
+                bat 'if exist index.html echo File Found'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying Project"
+                bat 'mkdir deploy'
+                bat 'copy index.html deploy'
+            }
+        }
+
+    }
+}
